@@ -45,7 +45,7 @@ echo "::group:: Install Packages"
 
 # Install a minimal package to verify the cache is working
 # This ensures the DNF cache is populated for future builds
-dnf5 install -y tmux
+dnf5 install -y tmux zsh nmap-ncat emacs fprintd fprintd-pam wev
 
 # Example using COPR with isolated pattern:
 # copr_install_isolated "ublue-os/staging" package-name
@@ -56,6 +56,8 @@ echo "::group:: System Configuration"
 
 # Enable/disable systemd services
 systemctl enable podman.socket
+systemctl enable sshd
+systemctl enable fprintd
 # Example: systemctl mask unwanted-service
 
 echo "::endgroup::"

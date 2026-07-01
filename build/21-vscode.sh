@@ -4,7 +4,7 @@
 set -euo pipefail
 
 ###############################################################################
-# Example: Installing 1Password and Google Chrome from Official Repositories
+# Installing 1Password from Official Repositories
 ###############################################################################
 # This is an EXAMPLE file showing how to add third-party RPM repositories
 # and install packages from them following Universal Blue/Bluefin conventions.
@@ -20,34 +20,13 @@ set -euo pipefail
 # - Remove repo files to keep the image clean (repos don't work at runtime)
 ###############################################################################
 
-### Install Google Chrome from Official Repository
-echo "Installing Google Chrome..."
-
-# Add Google Chrome RPM repository
-cat >/etc/yum.repos.d/google-chrome.repo <<'EOF'
-[google-chrome]
-name=google-chrome
-baseurl=https://dl.google.com/linux/chrome/rpm/stable/x86_64
-enabled=1
-gpgcheck=1
-gpgkey=https://dl.google.com/linux/linux_signing_key.pub
-EOF
-
-# Install Chrome
-dnf5 install -y google-chrome-stable
-
-# Clean up repo file (required - repos don't work at runtime in bootc images)
-rm -f /etc/yum.repos.d/google-chrome.repo
-
-echo "Google Chrome installed successfully"
-
 ### Install 1Password from Official Repository
 echo "Installing 1Password..."
 
-# Add 1Password RPM repository GPG key
-rpm --import https://downloads.1password.com/linux/keys/1password.asc
+# Add the 1Password repo key
+sudo rpm --import https://downloads.1password.com/linux/keys/1password.asc
 
-# Add 1Password RPM repository
+# Add 1Password repository
 cat >/etc/yum.repos.d/1password.repo <<'EOF'
 [1password]
 name=1Password Stable Channel
@@ -55,7 +34,7 @@ baseurl=https://downloads.1password.com/linux/rpm/stable/$basearch
 enabled=1
 gpgcheck=1
 repo_gpgcheck=1
-gpgkey=https://downloads.1password.com/linux/keys/1password.asc
+gpgkey="https://downloads.1password.com/linux/keys/1password.asc"
 EOF
 
 # Install 1Password
@@ -65,4 +44,5 @@ dnf5 install -y 1password
 rm -f /etc/yum.repos.d/1password.repo
 
 echo "1Password installed successfully"
-echo "Chrome and 1Password installation complete!"
+
+echo "1Password installation complete!"

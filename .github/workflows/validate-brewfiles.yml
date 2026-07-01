@@ -14,7 +14,7 @@ jobs:
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
 
       - name: Set up Homebrew
-        uses: Homebrew/actions/setup-homebrew@841d750a0ed9262d3c3ca31f2173974696bc261a # master
+        uses: Homebrew/actions/setup-homebrew@main # Using main to resolve https://github.com/Homebrew/brew/issues/22293
 
       - name: Validate Brewfiles
         shell: bash
@@ -24,8 +24,7 @@ jobs:
           find "custom/brew" -iname '*\.Brewfile*' -print0 | \
             while IFS= read -r -d '' brewfile ; do
               echo "::group:: ===$(basename "$brewfile")==="
-              brew bundle --file="$brewfile" 
-              if brew bundle check --file="$brewfile" 2>&1; then
+              if brew bundle check --file="$brewfile" 2>&1 || brew bundle install --file=$brewfile ; then
                 echo "✓ $brewfile is valid"
               else
                 echo "✗ $brewfile validation failed"
