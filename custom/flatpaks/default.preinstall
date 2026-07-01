@@ -5,8 +5,12 @@
 
 # Uncomment the apps you want installed on first boot:
 
-;[Flatpak Preinstall org.mozilla.firefox]
-;Branch=stable
+[Flatpak Preinstall org.mozilla.firefox]
+Branch=stable
+
+[Flatpak Preinstall org.gnome.World.PikaBackup]
+Branch=stable
+
 
 ;[Flatpak Preinstall org.mozilla.Thunderbird]
 ;Branch=stable
