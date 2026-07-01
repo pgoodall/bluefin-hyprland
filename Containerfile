@@ -86,6 +86,10 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=tmpfs,dst=/boot \
     --mount=type=tmpfs,dst=/tmp \
     /ctx/build/10-build.sh
+    /ctx/build/20-docker-chrome-install.sh
+    /ctx/build/21-vscode.sh
+    /ctx/build/22-1password.sh
+    /ctx/build/30-cosmic-desktop.sh
 
 ### CLEANUP
 ## Use Bluefin's clean-stage.sh to remove build artifacts before linting.
