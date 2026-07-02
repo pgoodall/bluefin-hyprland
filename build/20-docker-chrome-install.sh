@@ -21,25 +21,26 @@ set -euo pipefail
 ###############################################################################
 
 ### Install Google Chrome from Official Repository
-echo "Installing Google Chrome..."
+echo "Skipping install for Google Chrome..."
 
 # Add Google Chrome RPM repository
-cat >/etc/yum.repos.d/google-chrome.repo <<'EOF'
-[google-chrome]
-name=google-chrome
-baseurl=https://dl.google.com/linux/chrome/rpm/stable/x86_64
-enabled=1
-gpgcheck=1
-gpgkey=https://dl.google.com/linux/linux_signing_key.pub
-EOF
+# cat >/etc/yum.repos.d/google-chrome.repo <<'EOF'
+# [google-chrome]
+# name=google-chrome
+# baseurl=https://dl.google.com/linux/chrome/rpm/stable/x86_64
+# enabled=1
+# gpgcheck=1
+# gpgkey=https://dl.google.com/linux/linux_signing_key.pub
+# EOF
 
+### This fails when trying to write to /opt.
 # Install Chrome
-dnf5 install -y google-chrome-stable
+# dnf5 install -y google-chrome-stable
 
 # Clean up repo file (required - repos don't work at runtime in bootc images)
-rm -f /etc/yum.repos.d/google-chrome.repo
+# rm -f /etc/yum.repos.d/google-chrome.repo
 
-echo "Google Chrome installed successfully"
+# echo "Google Chrome installed successfully"
 
 ### Install Docker CE from Official Repository
 echo "Installing Docker CE..."
