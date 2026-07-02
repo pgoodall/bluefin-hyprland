@@ -47,7 +47,7 @@ gpgkey=https://download.docker.com/linux/fedora/gpg
 EOF
 
 # Make sure there is a corresponding sysusers.d user before the install
-RUN <<EOT /usr/bin/bash
+RUN <<EOT /usr/bin/sh
     set -xeuo pipefail
     cat > /usr/lib/sysusers.d/docker.conf << EOF
 g docker -
