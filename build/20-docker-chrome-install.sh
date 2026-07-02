@@ -33,7 +33,7 @@ echo "Skipping install for Google Chrome..."
 # gpgkey=https://dl.google.com/linux/linux_signing_key.pub
 # EOF
 
-### This fails when trying to write to /opt. 
+### This fails when trying to write to /opt.
 # Install Chrome
 # dnf5 install -y google-chrome-stable
 
