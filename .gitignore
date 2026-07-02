@@ -1,3 +1,4 @@
+.vscode
 cosign.key
 _build_*
 output
