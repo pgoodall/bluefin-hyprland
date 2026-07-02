@@ -4,7 +4,7 @@
 set -euo pipefail
 
 ### Checklist #################
-# [ ] Added to Containerfile  #
+# [x] Added to Containerfile  #
 # [x] File is executable      #
 #                             #
 ###############################
