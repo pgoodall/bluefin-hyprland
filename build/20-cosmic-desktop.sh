@@ -19,6 +19,12 @@ set -euo pipefail
 # you want COSMIC as your desktop environment instead of GNOME.
 ###############################################################################
 
+### Checklist #################
+# [x] Added to Containerfile  #
+# [x] File is executable      #
+#                             #
+###############################
+
 # Source helper functions
 # shellcheck source=/dev/null
 source /ctx/build/copr-helpers.sh
