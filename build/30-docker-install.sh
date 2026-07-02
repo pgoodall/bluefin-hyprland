@@ -46,6 +46,15 @@ gpgcheck=1
 gpgkey=https://download.docker.com/linux/fedora/gpg
 EOF
 
+# Make sure there is a corresponding sysusers.d user before the install
+RUN \
+    <<EOT bash
+    set -xeuo pipefail
+    cat > /usr/lib/sysusers.d/docker.conf << EOF
+g docker -
+EOF
+EOT
+
 # Install Docker CE
 dnf5 install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
