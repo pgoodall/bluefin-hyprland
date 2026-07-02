@@ -111,13 +111,13 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
 #     --mount=type=tmpfs,dst=/tmp \
 #     /ctx/build/40-1password.sh
 
-RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
-    --mount=type=cache,dst=/var/cache/libdnf5 \
-    --mount=type=cache,dst=/var/cache/rpm-ostree \
-    --mount=type=secret,id=GITHUB_TOKEN \
-    --mount=type=tmpfs,dst=/boot \
-    --mount=type=tmpfs,dst=/tmp \
-    /ctx/build/40-vscode-install.sh
+# RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+#     --mount=type=cache,dst=/var/cache/libdnf5 \
+#     --mount=type=cache,dst=/var/cache/rpm-ostree \
+#     --mount=type=secret,id=GITHUB_TOKEN \
+#     --mount=type=tmpfs,dst=/boot \
+#     --mount=type=tmpfs,dst=/tmp \
+#     /ctx/build/50-vscode-install.sh
 
 ### CLEANUP
 ## Use Bluefin's clean-stage.sh to remove build artifacts before linting.
