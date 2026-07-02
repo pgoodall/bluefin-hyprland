@@ -37,6 +37,9 @@ repo_gpgcheck=1
 gpgkey="https://downloads.1password.com/linux/keys/1password.asc"
 EOF
 
+# Make /opt an overlayfs
+systemctl enable --now ostree-state-overlay@opt.service
+
 # Install 1Password
 dnf5 install -y 1password
 
