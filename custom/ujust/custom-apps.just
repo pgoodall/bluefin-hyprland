@@ -79,3 +79,23 @@ install-vscode:
 [group('Apps')]
 install-gimp:
     ujust install-flatpak org.gimp.GIMP
+
+[group('Apps')]
+install-1password:
+    echo "Installing 1Password ..."
+    pushd "$(mktemp -d)"
+    curl -sSO https://downloads.1password.com/linux/tar/stable/x86_64/1password-latest.tar.gz
+    sudo tar -xf 1password-latest.tar.gz
+    if [ -d /opt/1Password ]; then
+        echo "Deleting existing 1Password directory ..."
+        rm -rf /opt/1Password
+    else
+        echo "Creating a the destination directory and copying files ..."
+        sudo mkdir -p /opt/1Password && sudo mv 1password-*/* /opt/1Password
+    fi
+    cat > /usr/lib/sysusers.d/1password.conf <<EOF
+    g 1password -
+    g 1password-cli -
+    g 1password-mcp -
+    EOF
+    sudo /opt/1Password/after-install.sh

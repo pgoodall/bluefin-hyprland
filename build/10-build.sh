@@ -58,6 +58,8 @@ echo "::group:: System Configuration"
 systemctl enable podman.socket
 systemctl enable sshd
 systemctl enable fprintd
+systemctl enable ostree-state-overlay@opt.service
+
 # Example: systemctl mask unwanted-service
 
 echo "::endgroup::"
