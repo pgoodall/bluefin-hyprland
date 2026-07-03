@@ -86,10 +86,10 @@ install-1password:
     pushd "$(mktemp -d)"
     curl -sSO https://downloads.1password.com/linux/tar/stable/x86_64/1password-latest.tar.gz
     sudo tar -xf 1password-latest.tar.gz
-    if [ -d /opt/1Password ]; then 
+    if [ -d /opt/1Password ]; then
         echo "Deleting existing 1Password directory ..."
         rm -rf /opt/1Password
-    else 
+    else
         echo "Creating a the destination directory and copying files ..."
         sudo mkdir -p /opt/1Password && sudo mv 1password-*/* /opt/1Password
     fi
