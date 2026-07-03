@@ -103,13 +103,22 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=tmpfs,dst=/tmp \
     /ctx/build/30-docker-install.sh
 
-RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+RUN <<EOT /usr/bin/bash 
+set -euxo pipefail
+mkdir /var/lib/
+rm -rf /opt/1Password
+ln -sr /var/lib/ /opt/
+cat > /var/lib/sysusers.d/1password.conf <<EOF
+g 1password -
+EOF
+    --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache/libdnf5 \
     --mount=type=cache,dst=/var/cache/rpm-ostree \
     --mount=type=secret,id=GITHUB_TOKEN \
     --mount=type=tmpfs,dst=/boot \
     --mount=type=tmpfs,dst=/tmp \
     /ctx/build/40-1password-install.sh
+EOT
 
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache/libdnf5 \
