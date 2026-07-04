@@ -18,6 +18,10 @@ shopt -s nullglob
 
 echo "::group:: Copy Bluefin Config from Common"
 
+# Copy all shared files from @projectbluefin/common/system_files/shared/
+rsync -rvK /ctx/common/shared/ /
+
+
 # Copy just files from @projectbluefin/common (includes 00-entry.just which imports 60-custom.just)
 mkdir -p /usr/share/ublue-os/just/
 shopt -s nullglob
