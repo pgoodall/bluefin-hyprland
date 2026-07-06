@@ -49,7 +49,7 @@ echo "::group:: Install Packages"
 
 # Install a minimal package to verify the cache is working
 # This ensures the DNF cache is populated for future builds
-dnf5 install -y tmux zsh nmap-ncat emacs fprintd fprintd-pam wev
+dnf5 install -y tmux zsh nmap-ncat emacs fprintd fprintd-pam wev fzf
 
 # Example using COPR with isolated pattern:
 # copr_install_isolated "ublue-os/staging" package-name

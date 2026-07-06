@@ -55,7 +55,15 @@ EOF
 EOT
 
 # Install Docker CE
-dnf5 install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+# shadow-utils and slirp4netns are needed for Rootless Docker
+dnf5 install -y \
+    docker-ce \
+    docker-ce-cli \
+    containerd.io \
+    docker-buildx-plugin \
+    docker-compose-plugin \
+    shadow-utils \
+    slirp4netns
 
 # Clean up repo file (required - repos don't work at runtime in bootc images)
 rm -f /etc/yum.repos.d/docker.repo
