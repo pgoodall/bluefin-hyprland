@@ -82,6 +82,7 @@ install-gimp:
 
 [group('Apps')]
 install-1password:
+    #!/usr/bin/env bash
     echo "Installing 1Password ..."
     pushd "$(mktemp -d)"
     curl -sSO https://downloads.1password.com/linux/tar/stable/x86_64/1password-latest.tar.gz
