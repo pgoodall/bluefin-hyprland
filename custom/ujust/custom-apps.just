@@ -87,16 +87,34 @@ install-1password:
     pushd "$(mktemp -d)"
     curl -sSO https://downloads.1password.com/linux/tar/stable/x86_64/1password-latest.tar.gz
     sudo tar -xf 1password-latest.tar.gz
-    if [ -d /opt/1Password ]; then
+    DEST_DIR="/opt/1Password"
+    # Check for an existing install
+    if [ -d ${DEST_DIR} ]; then
       echo "Deleting existing 1Password directory ..."
-      rm -rf /opt/1Password
-    else
-      echo "Creating a the destination directory and copying files ..."
-      sudo mkdir -p /opt/1Password && sudo mv 1password-*/* /opt/1Password
+      sudo rm -rf ${DEST_DIR}
     fi
-    cat > /usr/lib/sysusers.d/1password.conf <<EOF
-    g 1password -
-    g 1password-cli -
-    g 1password-mcp -
-    EOF
-    sudo /opt/1Password/after-install.sh
+    echo "Creating the destination directory and copying files ..."
+    sudo mkdir -p ${DEST_DIR} && sudo mv 1password-*/* ${DEST_DIR}
+    # chrome-sandbox requires the setuid bit to be specifically set.
+    # See https://github.com/electron/electron/issues/17972
+    chmod 4755 ${DEST_DIR}/chrome-sandbox
+    GROUP_NAME="onepassword"
+    # Setup the Core App Integration helper binary with the correct permissions and group
+    if [ ! "$(getent group "${GROUP_NAME}")" ]; then
+        groupadd "${GROUP_NAME}"
+    fi
+    BROWSER_SUPPORT_PATH="${DEST_DIR}/1Password-BrowserSupport"
+    # This gives no extra permissions to the binary. It only hardens it against environmental tampering.
+    chgrp "${GROUP_NAME}" ${BROWSER_SUPPORT_PATH}
+    chmod g+s ${BROWSER_SUPPORT_PATH}
+    MCP_GROUP_NAME="onepassword-mcp"
+    # Setup the MCP server binary with its own group and setgid so OPH can verify
+    # connecting peers via SO_PEERCRED.
+    if [ ! "$(getent group "${MCP_GROUP_NAME}")" ]; then
+        groupadd "${MCP_GROUP_NAME}"
+    fi
+    MCP_BINARY_PATH="${1PASSWORD_DIR}/onepassword-mcp"
+    if [ -f "$MCP_BINARY_PATH" ]; then
+        chgrp "${MCP_GROUP_NAME}" $MCP_BINARY_PATH
+        chmod g+s $MCP_BINARY_PATH
+    fi
