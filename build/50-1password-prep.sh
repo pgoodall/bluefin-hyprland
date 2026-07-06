@@ -23,7 +23,7 @@ set -euo pipefail
 ### Install 1Password from Official Repository
 echo "Essential preparation for installing 1Password..."
 
-1PASSWORD_DIR="/ctx/custom/files/1Password"
+ONEPASSWORD_DIR="/ctx/custom/files/1Password"
 
 # Make sure there is a corresponding sysusers.d user before the install
 <<EOT /usr/bin/sh
@@ -36,7 +36,7 @@ EOF
 EOT
 
 # Install 1Password policy file for system unlock
-install -Dm0644 ${1PASSWORD_DIR}/com.1password.1Password.policy -t /usr/share/polkit-1/actions/
+install -Dm0644 ${ONEPASSWORD_DIR}/com.1password.1Password.policy -t /usr/share/polkit-1/actions/
 
 GROUP_NAME="onepassword"
 
@@ -58,15 +58,15 @@ echo "Adding 1Password .desktop file ..."
 if [ -d /usr/share/applications ]; then
     # xdg-desktop-menu will only be available if xdg-utils is installed, which is likely but not guaranteed
     if [ -n "$(which xdg-desktop-menu)" ]; then
-        xdg-desktop-menu install --mode system --novendor ${1PASSWORD_DIR}/1password.desktop
+        xdg-desktop-menu install --mode system --novendor ${ONEPASSWORD_DIR}/1password.desktop
     else
-        install -m0644 ${1PASSWORD_DIR}/1password.desktop /usr/share/applications
+        install -m0644 ${ONEPASSWORD_DIR}/1password.desktop /usr/share/applications
     fi
 fi
 
 echo "Copying over the 1Password icons..."
 if [ -d /usr/share/icons ]; then
-    cp -rf ${1PASSWORD_DIR}/icons/* /usr/share/icons/
+    cp -rf ${ONEPASSWORD_DIR}/icons/* /usr/share/icons/
     # Update theme mtime to indicate update
     touch /usr/share/icons/hicolor
 fi
