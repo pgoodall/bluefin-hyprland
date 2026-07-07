@@ -86,7 +86,7 @@ install-1password:
     echo "Installing 1Password ..."
     pushd "$(mktemp -d)"
     curl -sSO https://downloads.1password.com/linux/tar/stable/x86_64/1password-latest.tar.gz
-    sudo tar -xf 1password-latest.tar.gz
+    tar -xf 1password-latest.tar.gz
     DEST_DIR="/opt/1Password"
     # Check for an existing install
     if [ -d ${DEST_DIR} ]; then
@@ -97,24 +97,29 @@ install-1password:
     sudo mkdir -p ${DEST_DIR} && sudo mv 1password-*/* ${DEST_DIR}
     # chrome-sandbox requires the setuid bit to be specifically set.
     # See https://github.com/electron/electron/issues/17972
-    chmod 4755 ${DEST_DIR}/chrome-sandbox
+    sudo chmod 4755 ${DEST_DIR}/chrome-sandbox
     GROUP_NAME="onepassword"
     # Setup the Core App Integration helper binary with the correct permissions and group
     if [ ! "$(getent group "${GROUP_NAME}")" ]; then
-        groupadd "${GROUP_NAME}"
+        sudo groupadd "${GROUP_NAME}"
     fi
     BROWSER_SUPPORT_PATH="${DEST_DIR}/1Password-BrowserSupport"
     # This gives no extra permissions to the binary. It only hardens it against environmental tampering.
-    chgrp "${GROUP_NAME}" ${BROWSER_SUPPORT_PATH}
-    chmod g+s ${BROWSER_SUPPORT_PATH}
+    sudo chgrp "${GROUP_NAME}" ${BROWSER_SUPPORT_PATH}
+    sudo chmod g+s ${BROWSER_SUPPORT_PATH}
     MCP_GROUP_NAME="onepassword-mcp"
     # Setup the MCP server binary with its own group and setgid so OPH can verify
     # connecting peers via SO_PEERCRED.
     if [ ! "$(getent group "${MCP_GROUP_NAME}")" ]; then
-        groupadd "${MCP_GROUP_NAME}"
+        sudo groupadd "${MCP_GROUP_NAME}"
     fi
-    MCP_BINARY_PATH="${1PASSWORD_DIR}/onepassword-mcp"
+    MCP_BINARY_PATH="${DEST_DIR}/onepassword-mcp"
     if [ -f "$MCP_BINARY_PATH" ]; then
-        chgrp "${MCP_GROUP_NAME}" $MCP_BINARY_PATH
-        chmod g+s $MCP_BINARY_PATH
+        sudo chgrp "${MCP_GROUP_NAME}" $MCP_BINARY_PATH
+        sudo chmod g+s $MCP_BINARY_PATH
     fi
+    if [ -s /etc/xdg/autostart/1password.desktop ] && [ -N /etc/xdg/autostart/1password.desktop]; then
+        echo "1password.desktop is already in autostart."
+    else
+        sudo cp /usr/share/applications/1password.desktop /etc/xdg/autostart
+        echo "1password.desktop added to autostart."
