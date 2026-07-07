@@ -124,4 +124,3 @@ install-1password:
         sudo cp /usr/share/applications/1password.desktop /etc/xdg/autostart
         echo "1password.desktop added to autostart."
     fi
-    
