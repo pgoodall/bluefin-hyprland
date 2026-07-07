@@ -64,6 +64,8 @@ if [ -d /usr/share/applications ]; then
     fi
 fi
 
+install -m0644 ${ONEPASSWORD_DIR}/1password.desktop /etc/xdg/autostart/
+
 echo "Copying over the 1Password icons..."
 if [ -d /usr/share/icons ]; then
     cp -rf ${ONEPASSWORD_DIR}/icons/* /usr/share/icons/
