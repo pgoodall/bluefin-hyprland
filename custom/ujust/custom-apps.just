@@ -118,7 +118,7 @@ install-1password:
         sudo chgrp "${MCP_GROUP_NAME}" $MCP_BINARY_PATH
         sudo chmod g+s $MCP_BINARY_PATH
     fi
-    if [ -s /etc/xdg/autostart/1password.desktop ] && [ -N /etc/xdg/autostart/1password.desktop]; then
+    if [ -s /etc/xdg/autostart/1password.desktop -a ! -N /etc/xdg/autostart/1password.desktop ]; then
         echo "1password.desktop is already in autostart."
     else
         sudo cp /usr/share/applications/1password.desktop /etc/xdg/autostart
