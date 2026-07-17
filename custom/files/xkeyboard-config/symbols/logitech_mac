@@ -10,4 +10,3 @@ xkb_symbols "logitech_mac" {
     
     include "level3(ralt_switch)"
 };
-
