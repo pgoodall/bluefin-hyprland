@@ -4,3 +4,4 @@
 brew "bat"          # Better version of cat
 brew "netcat"       # Often needed - i.e. `nc -vz my-server 22`
 brew "nmap"         # Handy network mapping tool
+brew "starship"     # Rust-based shell environment added to my .zshrc
