@@ -27,5 +27,5 @@ brew "gdb"            # GNU debugger
 brew "valgrind"       # Memory debugging tool
 
 # Utilities
-brew just             # I think this is needed for ujust to work
-brew just-lsp         # Syntax highlighting for just files
+brew "just"             # I think this is needed for ujust to work
+brew "just-lsp"         # Syntax highlighting for just files
