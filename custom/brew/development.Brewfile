@@ -8,8 +8,9 @@
 # brew "helm"           # Kubernetes package manager
 
 # Cloud tools
-# brew "awscli"         # AWS CLI
-# brew "azure-cli"      # Azure CLI
+brew "awscli"         # AWS CLI
+brew "azure-cli"      # Azure CLI
+cask "gcloud-cli"     # Google Cloud Platform CLI
 
 # Programming languages and tools
 # brew "go"             # Go programming language
@@ -24,3 +25,7 @@ brew "ninja"          # Small build system
 # Debugging and profiling
 brew "gdb"            # GNU debugger
 brew "valgrind"       # Memory debugging tool
+
+# Utilities
+brew "just"             # I think this is needed for ujust to work
+brew "just-lsp"         # Syntax highlighting for just files
