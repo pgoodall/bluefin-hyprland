@@ -1,4 +1,5 @@
 # .pre-commit-config.yaml
+exclude: custom/files/xkeyboard-config/symbols/logitech_mac
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
