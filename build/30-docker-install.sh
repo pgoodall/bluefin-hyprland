@@ -55,7 +55,7 @@ EOF
 EOT
 
 # Install Docker CE
-# shadow-utils and slirp4netns are needed for Rootless Docker
+# shadow-utils, slirp4netns, iptables and iptables-nft are needed for Rootless Docker
 dnf5 install -y \
     docker-ce \
     docker-ce-cli \
@@ -63,7 +63,9 @@ dnf5 install -y \
     docker-buildx-plugin \
     docker-compose-plugin \
     shadow-utils \
-    slirp4netns
+    slirp4netns \
+    iptables \
+    iptables-nft
 
 # Clean up repo file (required - repos don't work at runtime in bootc images)
 rm -f /etc/yum.repos.d/docker.repo

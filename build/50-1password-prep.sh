@@ -28,10 +28,9 @@ ONEPASSWORD_DIR="/ctx/custom/files/1Password"
 # Make sure there is a corresponding sysusers.d user before the install
 <<EOT /usr/bin/sh
     set -xeuo pipefail
-    cat > /usr/lib/sysusers.d/1password.conf << EOF
-g onepassword -
-g onepassword-cli -
-g onepassword-mcp -
+    cat > /usr/lib/sysusers.d/onepassword.conf << EOF
+g onepassword /opt/1password/1password
+g onepassword-mcp /opt/1Password-mcp
 EOF
 EOT
 

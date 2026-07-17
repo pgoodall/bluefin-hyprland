@@ -11,6 +11,20 @@ Branch=stable
 [Flatpak Preinstall org.gnome.World.PikaBackup]
 Branch=stable
 
+[Flatpak Preinstall com.spotify.Client]
+Branch=stable
+
+[ Flatpak Preinstall dev.edfloreshz.CosmicTweaks]
+Branch=stable
+
+[Flatpak Preinstall dev.heppen.webapps]
+Branch=stable
+
+[Flatpak Preinstall org.gnome.Loupe]
+Branch=stable
+
+[Flatpak Preinstall com.rafaelmardojai.Blanket]
+Branch=stable
 
 ;[Flatpak Preinstall org.mozilla.Thunderbird]
 ;Branch=stable
