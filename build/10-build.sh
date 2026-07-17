@@ -43,6 +43,9 @@ find /ctx/custom/ujust -iname '*.just' -exec printf "\n\n" \; -exec cat {} \; >>
 mkdir -p /usr/share/flatpak/preinstall.d/
 cp /ctx/custom/flatpaks/*.preinstall /usr/share/flatpak/preinstall.d/
 
+# Add custom keyboard layout for Logitech MX Keys S
+cp /ctx/custom/files/xkeyboard-config/symbols/logitech_mac /usr/share/xkeyboard-config-2/symbols/
+
 echo "::endgroup::"
 
 echo "::group:: Install Packages"
